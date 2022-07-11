@@ -2,7 +2,7 @@
   <section class="toy-app-container">
     <button @click="goToEdit" class="btn">Add toy</button>
     <toy-filter @setFilter="setFilter" />
-    <toy-list @removeToy="removeToy" v-if="toys" :toys="toysToShow" />
+    <toy-list @removeToy="removeToy" v-if="toys" :toys="toys" />
   </section>
 </template>
 
@@ -14,20 +14,20 @@ export default {
   name: 'toy-app',
   data() {
     return {
-      filterBy: null,
     }
   },
   computed: {
     toys() {
       return this.$store.getters.toys
     },
-    toysToShow() {
-         return this.$store.getters.filteredToys
-    },
+    // toysToShow() {
+    //      return this.$store.getters.filteredToys
+    // },
   },
   methods: {
     setFilter(filterBy) {
         this.$store.commit({ type: 'setFilter', filterBy })
+        this.$store.dispatch('loadToys')
     },
     goToEdit() {
       this.$router.push(`/toy/edit`)

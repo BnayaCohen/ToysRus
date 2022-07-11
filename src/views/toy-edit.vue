@@ -52,7 +52,6 @@ export default {
         if (id) {
             this.$store.dispatch({ type: 'getToyById', id }).then((toy) => {
                 this.toyToEdit = toy
-                console.log(this.toyToEdit);
             })
         } else this.toyToEdit = toyService.getEmptyToy()
     },

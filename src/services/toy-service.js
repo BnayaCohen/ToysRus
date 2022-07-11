@@ -21,7 +21,7 @@ function getLabels() {
 
 function query(filterBy) {
   // return storageService.query(KEY)
-  return axios.get(TOY_URL, { params: filterBy })
+  return axios.get(TOY_URL, { params: filterBy }).then(res => res.data)
 }
 
 function getById(toyId) {

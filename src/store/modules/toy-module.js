@@ -47,6 +47,7 @@ export default {
     },
     mutations: {
         setToys(state, { toys }) {
+            console.log(toys);
             state.toys = toys
         },
         removeToy(state, { id }) {
