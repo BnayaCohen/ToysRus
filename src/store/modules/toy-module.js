@@ -14,39 +14,36 @@ export default {
         toys(state) {
             return state.toys
         },
-        filteredToys({ filterBy, toys }) {
-            if (!toys) return
+        // filteredToys({ filterBy, toys }) {
+        //     if (!toys) return
 
-            const regex = new RegExp(filterBy.name, 'i')
-            let filteredToys = toys.filter((toy) => regex.test(toy.name))
+        //     const regex = new RegExp(filterBy.name, 'i')
+        //     let filteredToys = toys.filter((toy) => regex.test(toy.name))
 
-            if (filterBy.inStock !== null) {
-                filteredToys = filteredToys.filter(
-                    (toy) => toy.inStock === filterBy.inStock
-                )
-            }
+        //     if (filterBy.inStock !== null) {
+        //         filteredToys = filteredToys.filter(
+        //             (toy) => toy.inStock === filterBy.inStock
+        //         )
+        //     }
 
-            if (filterBy.labels.length) {
-                filteredToys = filteredToys.filter(toy =>
-                    filterBy.labels.some(label => toy.labels.includes(label))
-                )
-            }
+        //     if (filterBy.labels.length) {
+        //         filteredToys = filteredToys.filter(toy =>
+        //             filterBy.labels.some(label => toy.labels.includes(label))
+        //         )
+        //     }
 
-            if (filterBy.sortBy)
-                switch (filterBy.sortBy) {
-                    case 'name': filteredToys.sort((t1, t2) => t1.name.localeCompare(t2.name))
-                        break
-                    case 'date': filteredToys.sort((t1, t2) => t1.createdAt - t2.createdAt)
-                        break
-                    case 'price': filteredToys.sort((t1, t2) => t1.price - t2.price)
-                        break
-                }
+        //     if (filterBy.sortBy)
+        //         switch (filterBy.sortBy) {
+        //             case 'name': filteredToys.sort((t1, t2) => t1.name.localeCompare(t2.name))
+        //                 break
+        //             case 'date': filteredToys.sort((t1, t2) => t1.createdAt - t2.createdAt)
+        //                 break
+        //             case 'price': filteredToys.sort((t1, t2) => t1.price - t2.price)
+        //                 break
+        //         }
 
-            // const startIdx = filterBy.pageIdx * pageSize
-            // filteredToys = filteredToys.slice(startIdx, startIdx + pageSize)
-
-            return filteredToys
-        },
+        //     return filteredToys
+        // },
     },
     mutations: {
         setToys(state, { toys }) {
@@ -66,13 +63,12 @@ export default {
         },
     },
     actions: {
-        loadToys({ commit }) {
-            toyService.query().then((toys) => {
+        loadToys({ commit ,state }) {
+            toyService.query(state.filterBy).then((toys) => {
                 commit({ type: 'setToys', toys })
             })
         },
         removeToy({ commit }, { id }) {
-            console.log(id);
             toyService.remove(id).then(() => {
                 commit({ type: 'removeToy', id })
             })
@@ -83,14 +79,7 @@ export default {
             })
         },
         getToyById({ commit }, { id }) {
-            return toyService.getById(id).then(toy => {
-                toy.reviews = [
-                    { name: 'Yosi', txt: 'The bex toy' },
-                    { name: 'Ben', txt: 'OMG my son loves it' },
-                    { name: 'Shmuel', txt: 'this toy is shit' }
-                ]
-                return toy
-            })
+            return toyService.getById(id).then(toy => toy)
         },
     },
 }

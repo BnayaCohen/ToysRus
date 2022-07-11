@@ -1,7 +1,8 @@
-import { storageService } from './async-storage.service.js'
 import { utilService } from './util-service.js'
+import axios from 'axios'
 
-const KEY = 'toyDB'
+// const KEY = 'toyDB'
+const TOY_URL = '/api/toy/'
 
 export const toyService = {
   getLabels,
@@ -12,62 +13,65 @@ export const toyService = {
   getEmptyToy,
 }
 
-var gToys = _createToys()
+// var gToys = _createToys()
 
 function getLabels() {
   return ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 'Outdoor']
 }
 
-function query() {
-  return storageService.query(KEY)
+function query(filterBy) {
+  // return storageService.query(KEY)
+  return axios.get(TOY_URL, { params: filterBy })
 }
 
-function getById(id) {
-  return storageService.get(KEY, id)
+function getById(toyId) {
+  // return storageService.get(KEY, id)
+  return axios.get(TOY_URL + toyId).then(res => res.data)
 }
 
-function remove(id) {
-  return storageService.remove(KEY, id)
+function remove(toyId) {
+  // return storageService.remove(KEY, id)
+  return axios.delete(TOY_URL + toyId).then((res) => res.data)
 }
 
 function save(toy) {
   const savedToy = toy._id
-    ? storageService.put(KEY, toy)
-    : storageService.post(KEY, toy)
+    ? axios.put(TOY_URL, toy).then(res => res.data)
+    : axios.post(TOY_URL, toy).then((res) => res.data)
   return savedToy
 }
 
 function getEmptyToy() {
   return {
     _id: '',
-    name: 'Talking Doll',
-    price: 40,
-    labels: ['Doll', 'Battery Powered', 'Baby'],
+    name: '',
+    price: 0,
+    labels: [],
     createdAt: 0,
     inStock: true
   }
 }
 
-function _createToys() {
-  var toys = JSON.parse(localStorage.getItem(KEY))
-  if (!toys || !toys.length) {
-    toys = [
-      _createToy('Puki', 300, false),
-      _createToy('Muki', 100, true),
-      _createToy('Shuki', 150, true),
-    ]
-    localStorage.setItem(KEY, JSON.stringify(toys))
-  }
-  return toys
-}
+// function _createToys() {
+//   var toys = JSON.parse(localStorage.getItem(KEY))
+//   if (!toys || !toys.length) {
+//     toys = [
+//       _createToy('Puki', 300, false),
+//       _createToy('Muki', 100, true),
+//       _createToy('Shuki', 150, true),
+//     ]
+//     localStorage.setItem(KEY, JSON.stringify(toys))
+//   }
+//   return toys
+// }
 
-function _createToy(name, price, inStock) {
-  return {
-    _id: utilService.makeId(),
-    name,
-    price,
-    labels: ['On wheel', 'Art'],
-    createdAt: Date.now(),
-    inStock
-  }
-}
+// function _createToy(name, price, inStock) {
+//   return {
+//     _id: utilService.makeId(),
+//     name,
+//     price,
+//     labels: ['On wheel', 'Art'],
+//     createdAt: Date.now(),
+//     inStock
+//   }
+// }
