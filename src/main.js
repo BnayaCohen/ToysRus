@@ -5,6 +5,12 @@ import store from './store'
 
 const app = createApp(App)
 
+app.config.globalProperties.$filters = {
+  currencyUSD(price) {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price)
+  },
+}
+
 app.use(router)
 app.use(store)
 

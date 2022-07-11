@@ -1,13 +1,10 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
-<template>
+  <template>
   <header>
     <div class="wrapper">
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/toy">Toy</RouterLink>
         <!-- <RouterLink to="/about">About</RouterLink> -->
       </nav>
     </div>
@@ -15,6 +12,18 @@ import { RouterLink, RouterView } from 'vue-router'
 
   <RouterView />
 </template>
+  
+<script>
+import { RouterLink, RouterView } from 'vue-router'
+
+export default {
+  name: 'app',
+  created() {
+    this.$store.dispatch('loadToys')
+  }
+}
+</script>
+
 
 <style>
 @import '@/assets/main.css';
