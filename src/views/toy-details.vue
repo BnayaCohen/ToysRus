@@ -7,11 +7,15 @@
             <p><span class="fw-bold">Created at:</span> {{ new Date(toy.createdAt).toLocaleString() }}</p>
             <p><span class="fw-bold">In stock:</span> {{ toy.inStock ? 'Yes' : 'No' }}</p>
         </article>
+        <h2>Reviews</h2>
+         <review-list v-if="toy.reviews" :reviews="toy.reviews" />
         <button @click="goBack" class="btn btn-primary">go back</button>
     </section>
 </template>
 
 <script>
+import reviewList from '../components/review-list.vue'
+
 export default {
     name: 'toy-detail',
     data() {
@@ -30,7 +34,8 @@ export default {
             this.$router.push('/toy')
         },
     },
-    computed: {
+    components: {
+        reviewList
     }
 }
 </script>

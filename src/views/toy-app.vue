@@ -22,25 +22,17 @@ export default {
       return this.$store.getters.toys
     },
     toysToShow() {
-        //  return this.$store.getters.filteredTodos
-      if (!this.filterBy) return this.toys
-      const regex = new RegExp(this.filterBy.vendor, 'i')
-      return this.toys.filter((toy) => regex.test(toy.vendor))
+         return this.$store.getters.filteredToys
     },
-  },
-  created() {
-    // this.$store.dispatch('loadToys')
   },
   methods: {
     setFilter(filterBy) {
-        // this.$store.commit({ type: 'setFilter', filterBy })
-      this.filterBy = filterBy
+        this.$store.commit({ type: 'setFilter', filterBy })
     },
     goToEdit() {
       this.$router.push(`/toy/edit`)
     },
     removeToy(toyId) {
-        console.log('aaa');
       this.$store.dispatch({ type: 'removeToy', id: toyId })
     },
   },

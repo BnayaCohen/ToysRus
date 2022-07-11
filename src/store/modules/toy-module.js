@@ -5,6 +5,9 @@ export default {
         toys: null,
         filterBy: {
             name: '',
+            inStock: null,
+            labels: [],
+            sortBy: null,
         },
     },
     getters: {
@@ -17,15 +20,27 @@ export default {
             const regex = new RegExp(filterBy.name, 'i')
             let filteredToys = toys.filter((toy) => regex.test(toy.name))
 
-            // if (filterBy.isDone !== null) {
-            //   filteredToys = filteredToys.filter(
-            //     (toy) => toy.isDone === filterBy.isDone
-            //   )
-            // }
+            if (filterBy.inStock !== null) {
+                filteredToys = filteredToys.filter(
+                    (toy) => toy.inStock === filterBy.inStock
+                )
+            }
 
-            // if (filterBy.toSort) {
-            //   filteredToys.sort((t1, t2) => t1.name.localeCompare(t2.name))
-            // }
+            if (filterBy.labels.length) {
+                filteredToys = filteredToys.filter(toy =>
+                    filterBy.labels.some(label => toy.labels.includes(label))
+                )
+            }
+
+            if (filterBy.sortBy)
+                switch (filterBy.sortBy) {
+                    case 'name': filteredToys.sort((t1, t2) => t1.name.localeCompare(t2.name))
+                        break
+                    case 'date': filteredToys.sort((t1, t2) => t1.createdAt - t2.createdAt)
+                        break
+                    case 'price': filteredToys.sort((t1, t2) => t1.price - t2.price)
+                        break
+                }
 
             // const startIdx = filterBy.pageIdx * pageSize
             // filteredToys = filteredToys.slice(startIdx, startIdx + pageSize)
@@ -70,9 +85,9 @@ export default {
         getToyById({ commit }, { id }) {
             return toyService.getById(id).then(toy => {
                 toy.reviews = [
-                    { name: 'Yosi', review: 'The bex toy' },
-                    { name: 'Ben', review: 'OMG my son loves it' },
-                    { name: 'Shmuel', review: 'this toy is shit' }
+                    { name: 'Yosi', txt: 'The bex toy' },
+                    { name: 'Ben', txt: 'OMG my son loves it' },
+                    { name: 'Shmuel', txt: 'this toy is shit' }
                 ]
                 return toy
             })
