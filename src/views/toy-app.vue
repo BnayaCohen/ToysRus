@@ -20,9 +20,6 @@ export default {
     toys() {
       return this.$store.getters.toys
     },
-    // toysToShow() {
-    //      return this.$store.getters.filteredToys
-    // },
   },
   methods: {
     setFilter(filterBy) {

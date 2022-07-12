@@ -1,8 +1,9 @@
 import { utilService } from './util-service.js'
 import axios from 'axios'
 
-// const KEY = 'toyDB'
-const TOY_URL = '/api/toy/'
+const TOY_URL = (process.env.NODE_ENV !== 'development')
+  ? '/api/toy'
+  : '//localhost:3000/api/toy'
 
 export const toyService = {
   getLabels,
@@ -13,24 +14,19 @@ export const toyService = {
   getEmptyToy,
 }
 
-// var gToys = _createToys()
-
 function getLabels() {
   return ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 'Outdoor']
 }
 
 function query(filterBy) {
-  // return storageService.query(KEY)
   return axios.get(TOY_URL, { params: filterBy }).then(res => res.data)
 }
 
 function getById(toyId) {
-  // return storageService.get(KEY, id)
   return axios.get(TOY_URL + toyId).then(res => res.data)
 }
 
 function remove(toyId) {
-  // return storageService.remove(KEY, id)
   return axios.delete(TOY_URL + toyId).then((res) => res.data)
 }
 
@@ -51,27 +47,3 @@ function getEmptyToy() {
     inStock: true
   }
 }
-
-// function _createToys() {
-//   var toys = JSON.parse(localStorage.getItem(KEY))
-//   if (!toys || !toys.length) {
-//     toys = [
-//       _createToy('Puki', 300, false),
-//       _createToy('Muki', 100, true),
-//       _createToy('Shuki', 150, true),
-//     ]
-//     localStorage.setItem(KEY, JSON.stringify(toys))
-//   }
-//   return toys
-// }
-
-// function _createToy(name, price, inStock) {
-//   return {
-//     _id: utilService.makeId(),
-//     name,
-//     price,
-//     labels: ['On wheel', 'Art'],
-//     createdAt: Date.now(),
-//     inStock
-//   }
-// }
