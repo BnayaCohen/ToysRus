@@ -2,7 +2,7 @@ import { utilService } from './util-service.js'
 import axios from 'axios'
 
 const TOY_URL = (process.env.NODE_ENV !== 'development')
-  ? '/api/toy'
+  ? '/api/toy/'
   : '//localhost:3000/api/toy'
 
 export const toyService = {

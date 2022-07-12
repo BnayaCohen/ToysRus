@@ -1,0 +1,10 @@
+.main-header{
+    background-color: rgb(255, 221, 171);
+    height: 2rem;
+}
+
+.main-logo{
+    color: rgb(63, 56, 42);
+    font-weight: 600;
+    font-size: 1.2rem;
+}

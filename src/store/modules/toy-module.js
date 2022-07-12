@@ -13,37 +13,7 @@ export default {
     getters: {
         toys(state) {
             return state.toys
-        },
-        // filteredToys({ filterBy, toys }) {
-        //     if (!toys) return
-
-        //     const regex = new RegExp(filterBy.name, 'i')
-        //     let filteredToys = toys.filter((toy) => regex.test(toy.name))
-
-        //     if (filterBy.inStock !== null) {
-        //         filteredToys = filteredToys.filter(
-        //             (toy) => toy.inStock === filterBy.inStock
-        //         )
-        //     }
-
-        //     if (filterBy.labels.length) {
-        //         filteredToys = filteredToys.filter(toy =>
-        //             filterBy.labels.some(label => toy.labels.includes(label))
-        //         )
-        //     }
-
-        //     if (filterBy.sortBy)
-        //         switch (filterBy.sortBy) {
-        //             case 'name': filteredToys.sort((t1, t2) => t1.name.localeCompare(t2.name))
-        //                 break
-        //             case 'date': filteredToys.sort((t1, t2) => t1.createdAt - t2.createdAt)
-        //                 break
-        //             case 'price': filteredToys.sort((t1, t2) => t1.price - t2.price)
-        //                 break
-        //         }
-
-        //     return filteredToys
-        // },
+        }
     },
     mutations: {
         setToys(state, { toys }) {

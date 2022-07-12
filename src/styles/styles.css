@@ -8,5 +8,6 @@
 
 /** COMPONENTS **/
 @import './components/toy-list.css';
+@import './components/app-header.css';
 @import './components/custom-dropdown.css';
 @import './components/about-modal.css';
