@@ -1,6 +1,6 @@
 <template>
   <section class="toy-filter">
-    <input v-model="filterBy.name" @input="filter" type="text" class="form-input" placeholder="Search by name..." />
+    <el-input v-model="filterBy.name" @input="filter" type="text" placeholder="Search by name..." />
 
     <el-select v-model="filterBy.inStock" @change="filter">
       <el-option v-for="(opt, i) in userOptions" :key="i"

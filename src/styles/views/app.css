@@ -5,3 +5,10 @@ body {
 .app-container {
   min-height: 100vh;
 }
+
+.toy-filter{
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  width: 300px;
+}

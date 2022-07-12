@@ -1,6 +1,5 @@
 <template>
     <section v-if="toyToEdit" class="toy-edit py-2">
-
         <el-form :model="toyToEdit" label-width="120px" class="demo-ruleForm"
             :size="formSize" status-icon>
             <el-form-item label="Toy name" prop="name">
@@ -23,34 +22,6 @@
                 <el-button @click="goBack">Back</el-button>
             </el-form-item>
         </el-form>
-        <!-- <form @submit.prevent="saveToy" class="form">
-            <div class="form-control">
-                <label for="txt" class="form-label">Toy Name</label>
-                <input required v-model="toyToEdit.name" id="txt" type="text" class="form-input"
-                    placeholder="Enter your toy name here..." />
-            </div>
-            <div class="form-control">
-                <label for="price" class="form-label">Toy Price</label>
-                <input required v-model.number="toyToEdit.price" id="price" type="number" class="form-input" />
-            </div>
-            <div class="form-control">
-                <el-select v-model="toyToEdit.labels" multiple collapse-tags placeholder="Filter by Labels"
-                    style="width: 240px">
-                    <el-option v-for="(label, i) in getLabels" :key="i" :label="label" :value="label" />
-                </el-select>
-            </div>
-            <div class="form-control">
-                <label for="stock" class="form-label">Toy In stock</label>
-                <select v-model="toyToEdit.inStock" id="stock" class="form-input">
-                    <option :value="true">Yes</option>
-                    <option :value="false">No</option>
-                </select>
-            </div>
-            <div class="btn-group">
-                <button @click="saveToy" class="btn btn-info">Save</button>
-                <button @click="goBack" class="btn btn-danger-text">Back</button>
-            </div>
-        </form> -->
     </section>
 </template>
 
