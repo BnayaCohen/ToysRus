@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const TOY_URL = (process.env.NODE_ENV !== 'development')
   ? '/api/toy/'
-  : '//localhost:3000/api/toy'
+  : '//localhost:3030/api/toy'
 
 export const toyService = {
   getLabels,

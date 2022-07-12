@@ -1,6 +1,6 @@
 <template>
   <section class="toy-app-container">
-    <button @click="goToEdit" class="btn">Add toy</button>
+    <el-button type="warning" @click="goToEdit">Add toy</el-button>
     <toy-filter @setFilter="setFilter" />
     <toy-list @removeToy="removeToy" v-if="toys" :toys="toys" />
   </section>

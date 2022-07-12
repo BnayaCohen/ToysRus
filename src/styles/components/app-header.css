@@ -1,10 +1,11 @@
 .main-header{
-    background-color: rgb(255, 221, 171);
-    height: 2rem;
+    background-color: #ffe7c3;
+    height: 4rem;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.65);
+    padding-inline-start: 15px;
 }
 
 .main-logo{
-    color: rgb(63, 56, 42);
-    font-weight: 600;
-    font-size: 1.2rem;
+    color: #686868;
+    font-size: 1.6rem;
 }

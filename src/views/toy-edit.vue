@@ -1,6 +1,29 @@
 <template>
     <section v-if="toyToEdit" class="toy-edit py-2">
-        <form @submit.prevent="saveToy" class="form">
+
+        <el-form :model="toyToEdit" label-width="120px" class="demo-ruleForm"
+            :size="formSize" status-icon>
+            <el-form-item label="Toy name" prop="name">
+                <el-input v-model="toyToEdit.name" />
+            </el-form-item>
+            <el-form-item label="Toy price" prop="price">
+                <el-input v-model.number="toyToEdit.price" />
+            </el-form-item>
+            <el-form-item label="Toy labels" prop="labels">
+
+                <el-select v-model="toyToEdit.labels" multiple collapse-tags placeholder="Select labels">
+                    <el-option v-for="(label, i) in getLabels" :key="i" :label="label" :value="label" />
+                </el-select>
+            </el-form-item>
+            <el-form-item label="Is in stock" prop="inStock">
+                <el-switch v-model="toyToEdit.inStock" />
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="saveToy">Save</el-button>
+                <el-button @click="goBack">Back</el-button>
+            </el-form-item>
+        </el-form>
+        <!-- <form @submit.prevent="saveToy" class="form">
             <div class="form-control">
                 <label for="txt" class="form-label">Toy Name</label>
                 <input required v-model="toyToEdit.name" id="txt" type="text" class="form-input"
@@ -11,16 +34,10 @@
                 <input required v-model.number="toyToEdit.price" id="price" type="number" class="form-input" />
             </div>
             <div class="form-control">
-                <label for="labels" class="form-label">Toy Labels</label>
-                <select v-model="toyToEdit.labels" id="labels" class="form-input" multiple>
-                    <option value="On wheels">On wheels</option>
-                    <option value="Box game">Box game</option>
-                    <option value="Art">Art</option>
-                    <option value="Baby">Baby</option>
-                    <option value="Doll">Doll</option>
-                    <option value="Puzzle">Puzzle</option>
-                    <option value="Outdoor">Outdoor</option>
-                </select>
+                <el-select v-model="toyToEdit.labels" multiple collapse-tags placeholder="Filter by Labels"
+                    style="width: 240px">
+                    <el-option v-for="(label, i) in getLabels" :key="i" :label="label" :value="label" />
+                </el-select>
             </div>
             <div class="form-control">
                 <label for="stock" class="form-label">Toy In stock</label>
@@ -33,18 +50,21 @@
                 <button @click="saveToy" class="btn btn-info">Save</button>
                 <button @click="goBack" class="btn btn-danger-text">Back</button>
             </div>
-        </form>
+        </form> -->
     </section>
 </template>
 
 <script>
 import { toyService } from '../services/toy-service'
+import { reactive, ref } from 'vue'
+// import type { FormInstance, FormRules } from 'element-plus'
 
 export default {
     name: 'toy-edit',
     data() {
         return {
             toyToEdit: null,
+            formSize: ref('default')
         }
     },
     created() {
@@ -65,6 +85,11 @@ export default {
                     this.$router.push('/toy')
                 })
         },
+    },
+    computed: {
+        getLabels() {
+            return this.$store.getters.toysLabels
+        }
     },
 }
 </script>
