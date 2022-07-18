@@ -1,5 +1,7 @@
 <template>
     <section v-if="toy" class="toy-details items-center">
+        <chatCmp :toyId="toy._id" />
+
         <article>
             <p><span class="fw-bold">Name:</span> {{ toy.name }}</p>
             <p><span class="fw-bold">Price:</span> {{ $filters.currencyUSD(toy.price) }}</p>
@@ -18,6 +20,7 @@
 
 <script>
 import reviewList from '../components/review-list.vue'
+import chatCmp from '../components/chat-cmp.vue'
 
 export default {
     name: 'toy-detail',
@@ -56,7 +59,8 @@ export default {
         }
     },
     components: {
-        reviewList
+        reviewList,
+        chatCmp
     }
 }
 </script>

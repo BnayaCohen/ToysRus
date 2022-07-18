@@ -1,6 +1,6 @@
 import { httpService } from './http.service'
 import { userService } from './user-service'
-// import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket.service'
+// import { socketService, SOCKET_EVENT_REVIEW_ADDED } from './socket-service'
 
 export const reviewService = {
   add,

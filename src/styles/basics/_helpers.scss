@@ -5,6 +5,9 @@
 .flex.inline-flex {
     display: inline-flex;
 }
+.flex.flex-column {
+    flex-direction: column;
+}
 .align-self-center {
     align-self: center;
 }

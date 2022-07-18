@@ -14,15 +14,15 @@ export default {
     data() {
         return {
             loggedInUser: null,
-            userReviews: [],
-            userOrToy:'aboutToy'
+            // userReviews: [],
+            userOrToy: 'aboutToy'
         }
     },
     methods: {
         async removeReview(review) {
             await this.$store.dispatch({ type: 'removeReview', reviewId: review })
-            await this.$store.dispatch('loadReviews')
-            this.userReviews = this.$store.getters.reviews
+            // await this.$store.dispatch('loadReviews')
+            // this.userReviews = this.$store.getters.reviews
         }
     },
     async created() {
@@ -31,10 +31,12 @@ export default {
 
         this.$store.commit({ type: 'setReviewFilter', filterBy: { byUserId: this.loggedInUser._id } })
         await this.$store.dispatch('loadReviews')
-        this.userReviews = this.$store.getters.reviews
-        console.log(this.userReviews);
+        // this.userReviews = this.$store.getters.reviews
     },
     computed: {
+        userReviews() {
+            return this.$store.getters.reviews
+        }
     },
     components: {
         reviewList

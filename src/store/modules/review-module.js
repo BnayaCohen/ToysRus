@@ -36,9 +36,10 @@ export default {
                 console.log('cannot save review');
             }
         },
-        async removeReview({ commit }, { reviewId }) {
+        async removeReview({ commit, dispatch }, { reviewId }) {
             try {
                 await reviewService.remove(reviewId)
+                await dispatch('loadReviews')
             } catch {
                 console.log('cannot remove review');
             }

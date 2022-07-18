@@ -1,0 +1,15 @@
+.chat-container {
+    background-color: antiquewhite;
+    z-index: 20;
+    position: fixed;
+    bottom: -5px;
+    right: 30px;
+    width: 300px;
+    height: 300px;
+    padding: 10px;
+    border-radius: 5px;
+
+    .el-input{
+        margin-right: 10px;
+    }
+}
