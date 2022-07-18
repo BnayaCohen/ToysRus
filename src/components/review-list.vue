@@ -1,6 +1,7 @@
 <template>
-    <ul class="review-list clean-list grid gap-1">
-        <review-preview v-for="(review, i) in reviews" :review="review" :key="i" />
+    <ul class="review-list clean-list">
+        <review-preview v-for="(review, i) in reviews" :review="review" :name="reviewUserOrToy(review)" :key="i"
+            @removingReview="$emit('removed', $event)" />
     </ul>
 </template>
 
@@ -9,15 +10,19 @@ import reviewPreview from './review-preview.vue'
 
 export default {
     props: {
-        reviews: Array
+        reviews: Array,
+        userOrToy: String
     },
     methods: {
+        reviewUserOrToy(review) {
+            switch (this.userOrToy) {
+                case 'byUser': return review.byUser.username
+                case 'aboutToy': return review.aboutToy.name
+            }
+        }
     },
     components: {
         reviewPreview,
     },
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

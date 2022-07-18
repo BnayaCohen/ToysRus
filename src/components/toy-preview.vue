@@ -3,7 +3,7 @@
         <el-row>
             <el-col>
                 <el-card :body-style="{ padding: '0px' }">
-                    <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                    <img :src="toyImgSrc"
                         class="image" />
                     <div style="padding: 14px">
                         <span>{{ toy.name }}</span>
@@ -12,7 +12,7 @@
                         <div class="toy-bottom">
                             <el-button-group class="ml-4">
                                 <el-button @click="goToEdit" type="primary" plain>Edit</el-button>
-                                <el-button @click="goToDetail" type="warning" plain>Eetails</el-button>
+                                <el-button @click="goToDetail" type="warning" plain>Details</el-button>
                                 <el-button @click="removeToy" type="danger" plain>Remove</el-button>
                             </el-button-group>
                         </div>
@@ -33,6 +33,11 @@ export default {
             type: Object,
         }
     },
+    computed:{
+toyImgSrc(){
+    return `https://robohash.org/${this.toy.name}`
+}
+    },
     methods: {
         goToDetail() {
             this.$router.push(`/toy/${this.toy._id}`)
@@ -46,28 +51,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.toy-preview{
-width: 250px;
-}
-
-.toy-price,
-.toy-in-stock {
-    font-size: 12px;
-    color: #999;
-}
-
-.toy-bottom {
-    margin-top: 13px;
-    line-height: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.image {
-    width: 100%;
-    display: block;
-}
-</style>

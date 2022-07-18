@@ -1,0 +1,20 @@
+.toy-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+  gap: 5px;
+
+  .toy-preview {
+    width: 245px;
+  }
+
+  .toy-price,
+  .toy-in-stock {
+    font-size: em(12px);
+    color: $clr4;
+  }
+
+  .image {
+    width: 100%;
+    display: block;
+  }
+}

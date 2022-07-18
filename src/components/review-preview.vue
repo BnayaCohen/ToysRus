@@ -1,7 +1,8 @@
 <template>
     <li class="review-preview">
-        <h3>{{ review.name }}</h3>
-        <p><span class="fw-bold">Review:</span> {{ review.txt }}</p>
+        <h3>{{ name }}</h3>
+        <p>{{ review.txt }}</p>
+        <el-button type="danger" @click="$emit('removingReview',review._id)">Remove</el-button>
     </li>
 </template>
 
@@ -11,10 +12,12 @@ export default {
     props: {
         review: {
             type: Object,
+        },
+        name:{
+            type: String,
         }
     },
+    methods: {
+    }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

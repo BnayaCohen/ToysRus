@@ -1,6 +1,8 @@
 <template>
-  <app-header />
-  <RouterView />
+  <div class="main-layout app-container">
+    <app-header />
+    <RouterView />
+  </div>
 </template>
   
 <script>

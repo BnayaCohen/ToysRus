@@ -1,9 +1,9 @@
-import { utilService } from './util-service.js'
 import axios from 'axios'
+axios.defaults.withCredentials= true
 
 const TOY_URL = (process.env.NODE_ENV !== 'development')
   ? '/api/toy/'
-  : '//localhost:3030/api/toy'
+  : '//localhost:3030/api/toy/'
 
 export const toyService = {
   getLabels,
@@ -18,23 +18,37 @@ function getLabels() {
   return ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 'Outdoor']
 }
 
-function query(filterBy) {
-  return axios.get(TOY_URL, { params: filterBy }).then(res => res.data)
+async function query(filterBy) {
+  try {
+    const res = await axios.get(TOY_URL, { params: filterBy })
+    return res.data
+  } catch (err) {
+    console.log('Cannot get toys', err)
+  }
 }
 
-function getById(toyId) {
-  return axios.get(TOY_URL + toyId).then(res => res.data)
+async function getById(toyId) {
+  try {
+    const res = await axios.get(TOY_URL + toyId)
+    return res.data
+  } catch (err) {
+    console.log('Cannot get the toy', err)
+  }
 }
 
-function remove(toyId) {
-  return axios.delete(TOY_URL + toyId).then((res) => res.data)
+async function remove(toyId) {
+  await axios.delete(TOY_URL + toyId)
 }
 
-function save(toy) {
-  const savedToy = toy._id
-    ? axios.put(TOY_URL, toy).then(res => res.data)
-    : axios.post(TOY_URL, toy).then((res) => res.data)
-  return savedToy
+async function save(toy) {
+  try {
+    const savedToy = toy._id
+      ? await axios.put(TOY_URL, toy)
+      : await axios.post(TOY_URL, toy)
+    return savedToy.data
+  } catch {
+    console.log('cannot save toy')
+  }
 }
 
 function getEmptyToy() {
@@ -43,6 +57,7 @@ function getEmptyToy() {
     name: '',
     price: 0,
     labels: [],
+    reviewes: [],
     createdAt: 0,
     inStock: true
   }

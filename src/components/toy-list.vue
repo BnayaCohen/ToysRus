@@ -8,6 +8,7 @@
 import toyPreview from './toy-preview.vue'
 
 export default {
+    name:'toy-list',
     props: {
         toys: Array
     },
@@ -21,6 +22,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

@@ -23,8 +23,8 @@ export default {
   },
   methods: {
     setFilter(filterBy) {
-        this.$store.commit({ type: 'setFilter', filterBy })
-        this.$store.dispatch('loadToys')
+      this.$store.commit({ type: 'setFilter', filterBy })
+      this.$store.dispatch('loadToys')
     },
     goToEdit() {
       this.$router.push(`/toy/edit`)
@@ -32,6 +32,10 @@ export default {
     removeToy(toyId) {
       this.$store.dispatch({ type: 'removeToy', id: toyId })
     },
+  },
+  created() {
+    if (!this.$store.getters.user)
+      this.$router.push('/login')
   },
   components: {
     toyList,

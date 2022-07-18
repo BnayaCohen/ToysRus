@@ -18,6 +18,8 @@ export default {
         DoughnutChart
     },
     created() {
+        console.log( this.$store.getters.toysPricesByLabel);
+        // this.$store.dispatch('loadToys')
     },
     computed: {
         testDataPrices() {
@@ -51,6 +53,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

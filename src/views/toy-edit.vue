@@ -1,7 +1,6 @@
 <template>
     <section v-if="toyToEdit" class="toy-edit py-2">
-        <el-form :model="toyToEdit" label-width="120px" class="demo-ruleForm"
-            :size="formSize" status-icon>
+        <el-form :model="toyToEdit" label-width="120px" class="demo-ruleForm" :size="formSize" status-icon>
             <el-form-item label="Toy name" prop="name">
                 <el-input v-model="toyToEdit.name" />
             </el-form-item>
@@ -50,11 +49,9 @@ export default {
         goBack() {
             this.$router.push('/toy')
         },
-        saveToy() {
-            this.$store.dispatch({ type: 'saveToy', toy: this.toyToEdit })
-                .then(() => {
-                    this.$router.push('/toy')
-                })
+        async saveToy() {
+            await this.$store.dispatch({ type: 'saveToy', toy: this.toyToEdit })
+            this.$router.push('/toy')
         },
     },
     computed: {

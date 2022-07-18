@@ -27,12 +27,12 @@ export default {
     return {
       filterBy: {
         name: '',
-        inStock: null,
+        inStock: 'all',
         labels: [],
         sortBy: null,
       },
       userOptions: ['All', 'In stock', 'Out of stock'],
-      valueOptions: [null, true, false],
+      valueOptions: ['all', true, false],
     }
   },
   methods: {
@@ -49,9 +49,6 @@ export default {
       return this.$store.getters.toysLabels
     }
   },
-  unmounted() {
-    this.filterBy = { name: '', inStock: null, labels: [], sortBy: null, }
-    this.$emit('setFilter', this.filterBy)
-  }
 }
+
 </script>

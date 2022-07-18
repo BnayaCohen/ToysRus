@@ -1,11 +1,12 @@
 import { toyService } from '@/services/toy-service'
+import { reviewService } from '@/services/review-service'
 
 export default {
     state: {
         toys: null,
         filterBy: {
             name: '',
-            inStock: null,
+            inStock: 'all',
             labels: [],
             sortBy: null,
         },
@@ -18,6 +19,8 @@ export default {
             return toyService.getLabels()
         },
         toysPricesByLabel(state) {
+            // if (!state.toys) return {}
+            console.log(state.toys);
             let labelMap = {}
             state.toys.forEach(toy => {
                 toy.labels.forEach(label => {
@@ -37,6 +40,8 @@ export default {
             return { labels: toysLabelNames, prices: toysLabelPrices }
         },
         toysInStockByLabel(state) {
+            // if (!state.toys) return {}
+
             let labelMap = {}
             state.toys.forEach(toy => {
                 toy.labels.forEach(label => {
@@ -57,7 +62,6 @@ export default {
     },
     mutations: {
         setToys(state, { toys }) {
-            console.log(toys);
             state.toys = toys
         },
         removeToy(state, { id }) {
@@ -74,23 +78,28 @@ export default {
         },
     },
     actions: {
-        loadToys({ commit, state }) {
-            toyService.query(state.filterBy).then((toys) => {
-                commit({ type: 'setToys', toys })
-            })
+        async loadToys({ commit, state }) {
+            const toys = await toyService.query(state.filterBy)
+            commit({ type: 'setToys', toys })
         },
-        removeToy({ commit }, { id }) {
-            toyService.remove(id).then(() => {
+        async removeToy({ commit }, { id }) {
+            try {
+                await toyService.remove(id)
                 commit({ type: 'removeToy', id })
-            })
+            } catch {
+                console.log('cannot remove toy');
+            }
         },
-        saveToy({ commit }, { toy }) {
-            toyService.save(toy).then((toy) => {
+        async saveToy({ commit }, { toy }) {
+            try {
+                toy = await toyService.save(toy)
                 commit({ type: 'saveToy', toy })
-            })
+            } catch {
+                console.log('cannot save toy');
+            }
         },
-        getToyById({ commit }, { id }) {
-            return toyService.getById(id).then(toy => toy)
+        async getToyById({ commit }, { id }) {
+            return await toyService.getById(id)
         },
     },
 }
